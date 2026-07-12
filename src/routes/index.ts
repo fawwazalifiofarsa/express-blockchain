@@ -1,12 +1,11 @@
 import { Router } from "express";
 
+import { sendSuccess } from "../common/utils/api-response.js";
+
 const apiRouter = Router();
 
 apiRouter.get("/health", (_request, response) => {
-  response.status(200).json({
-    success: true,
-    message: "Asset Registration API is running",
-  });
+  sendSuccess(response, 200, "Asset Registration API is running");
 });
 
 export default apiRouter;

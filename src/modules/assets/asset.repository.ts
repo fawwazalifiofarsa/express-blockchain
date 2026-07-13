@@ -1,16 +1,8 @@
-import { generateId } from "../../common/utils/generate-id.js";
 import { memoryDatabase } from "../../database/memory.database.js";
-import type { Asset, CreateAssetInput } from "./asset.types.js";
+import type { Asset } from "./asset.types.js";
 
 export class AssetRepository {
-  create(input: CreateAssetInput, ownerId: string): Asset {
-    const asset: Asset = {
-      id: generateId(),
-      ...input,
-      ownerId,
-      createdAt: new Date().toISOString(),
-    };
-
+  create(asset: Asset): Asset {
     memoryDatabase.assets.push(asset);
     return asset;
   }

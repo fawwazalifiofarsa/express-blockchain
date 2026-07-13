@@ -11,13 +11,14 @@ import type {
 export function createAsset(
   request: Request<object, object, CreateAssetRequest>,
   response: Response,
-): void {
+): Promise<void> {
   if (!request.userId) {
     throw new AppError("Authentication required", 401);
   }
 
-  const asset = assetService.create(request.body, request.userId);
-  sendSuccess(response, 201, "Asset registered successfully", asset);
+  return assetService.create(request.body, request.userId).then((asset) => {
+    sendSuccess(response, 201, "Asset registered successfully", asset);
+  });
 }
 
 export function getAssets(_request: Request, response: Response): void {

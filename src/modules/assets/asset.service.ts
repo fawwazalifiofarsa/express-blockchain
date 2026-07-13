@@ -17,11 +17,12 @@ export class AssetService {
     private readonly registry: AssetRegistryService = assetRegistryService,
   ) {}
 
-  create(input: CreateAssetRequest, ownerId: string): Asset {
+  async create(input: CreateAssetRequest, ownerId: string): Promise<Asset> {
+    const id = generateId();
     const asset: Asset = {
-      id: generateId(),
+      id,
       ...input,
-      ...this.registry.register(input.metadata),
+      ...(await this.registry.register(id, input.metadata)),
       ownerId,
       createdAt: new Date().toISOString(),
     };

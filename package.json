@@ -7,9 +7,11 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx watch src/server.ts",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "test": "tsx --test --test-concurrency=1 tests/auth.test.ts tests/assets.test.ts tests/metadata-hash.test.ts"
   },
   "dependencies": {
+    "@types/supertest": "^7.2.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -17,6 +19,7 @@
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.3",
+    "supertest": "^7.2.2",
     "swagger-jsdoc": "^6.3.0",
     "swagger-ui-express": "^5.0.1",
     "zod": "^4.1.12"

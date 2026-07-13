@@ -73,6 +73,27 @@ export const authSchemas = {
   },
 } as const;
 
+export const authResponses = {
+  DuplicateEmail: {
+    description: "The normalized email address is already registered.",
+    content: {
+      "application/json": {
+        schema: { $ref: "#/components/schemas/ErrorResponse" },
+        example: { success: false, message: "Email is already registered" },
+      },
+    },
+  },
+  InvalidCredentials: {
+    description: "The email or password is incorrect.",
+    content: {
+      "application/json": {
+        schema: { $ref: "#/components/schemas/ErrorResponse" },
+        example: { success: false, message: "Invalid email or password" },
+      },
+    },
+  },
+} as const;
+
 export const authPaths = {
   "/api/auth/register": {
     post: {

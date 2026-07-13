@@ -2,11 +2,13 @@ import { Router } from "express";
 
 import { sendSuccess } from "../common/utils/api-response.js";
 import authRouter from "../modules/auth/auth.routes.js";
+import assetRouter from "../modules/assets/asset.routes.js";
 import userRouter from "../modules/users/user.routes.js";
 
 const apiRouter = Router();
 
 apiRouter.use("/auth", authRouter);
+apiRouter.use("/assets", assetRouter);
 apiRouter.use("/users", userRouter);
 
 apiRouter.get("/health", (_request, response) => {

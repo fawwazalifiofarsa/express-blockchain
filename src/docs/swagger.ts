@@ -1,11 +1,24 @@
 import swaggerJsdoc from "swagger-jsdoc";
 
 import { env } from "../config/env.js";
+import {
+  assetPaths,
+  assetResponses,
+  assetSchemas,
+} from "../modules/assets/asset.swagger.js";
 import { commonResponses } from "./common/common.responses.js";
 import { commonSchemas } from "./common/common.schemas.js";
 import { healthPaths, healthSchemas } from "./paths/health.paths.js";
-import { authPaths, authSchemas } from "../modules/auth/auth.swagger.js";
-import { userPaths, userSchemas } from "../modules/users/user.swagger.js";
+import {
+  authPaths,
+  authResponses,
+  authSchemas,
+} from "../modules/auth/auth.swagger.js";
+import {
+  userPaths,
+  userResponses,
+  userSchemas,
+} from "../modules/users/user.swagger.js";
 
 export const swaggerSpecification = swaggerJsdoc({
   definition: {
@@ -25,6 +38,7 @@ export const swaggerSpecification = swaggerJsdoc({
       { name: "Health", description: "API availability" },
       { name: "Authentication", description: "User registration and login" },
       { name: "Users", description: "Authenticated user operations" },
+      { name: "Assets", description: "Asset registration and retrieval" },
     ],
     components: {
       securitySchemes: {
@@ -39,13 +53,20 @@ export const swaggerSpecification = swaggerJsdoc({
         ...healthSchemas,
         ...authSchemas,
         ...userSchemas,
+        ...assetSchemas,
       },
-      responses: commonResponses,
+      responses: {
+        ...commonResponses,
+        ...authResponses,
+        ...userResponses,
+        ...assetResponses,
+      },
     },
     paths: {
       ...healthPaths,
       ...authPaths,
       ...userPaths,
+      ...assetPaths,
     },
   },
   apis: [],

@@ -22,6 +22,18 @@ export const userSchemas = {
   },
 } as const;
 
+export const userResponses = {
+  UserNotFound: {
+    description: "The authenticated user could not be found.",
+    content: {
+      "application/json": {
+        schema: { $ref: "#/components/schemas/ErrorResponse" },
+        example: { success: false, message: "User not found" },
+      },
+    },
+  },
+} as const;
+
 export const userPaths = {
   "/api/users/me": {
     get: {
